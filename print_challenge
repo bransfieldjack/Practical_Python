@@ -1,0 +1,1 @@
+print('"Apples and oranges", remarked John. "Nope, I\'d be enclined to disagree."')
