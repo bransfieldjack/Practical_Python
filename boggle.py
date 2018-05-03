@@ -1,9 +1,13 @@
 
 def make_grid(width, height):
     """
-    Makes an empty boggle grid
+    Creates a grid that will hold all of the tiles for a boggle game
     """
     
-    return {}
+    return {
+        (row, col): ' ' 
+        for row in range (height)
+        for col in range (width)
+    }
     
     
