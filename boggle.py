@@ -42,4 +42,16 @@ def neighbours_of_a_position(coords):
             left, right, 
             bottom_left, bottom_center, bottom_right]
             
-            
+def all_grid_neighbours(grid):
+    """
+    Get all of the possible neighbours for each position in
+    the grid.in
+    """
+    neighbours = {}
+    
+    for position in grid:
+        position_neighbours = neighbours_of_a_position(position)
+        neighbours[position] = [p for p in position_neighbours if p in grid]
+        return neighbours
+        
+        

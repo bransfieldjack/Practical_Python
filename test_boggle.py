@@ -39,9 +39,9 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         """
         Ensure that a position has 8 neighbours
         """
-        coords = (1, 2)
-        neighbours = boggle.neighbours_of_a_position(coords)
-        self.assertIn((0, 1), neighbours)
+        coords = (1, 2) #Variable coords set to (1, 2)
+        neighbours = boggle.neighbours_of_a_position(coords) #Neighbours variable calls function from boggle.py
+        self.assertIn((0, 1), neighbours) #Tests positions on the grid
         self.assertIn((0, 2), neighbours)
         self.assertIn((0, 3), neighbours)
         self.assertIn((1, 1), neighbours)
@@ -50,7 +50,22 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         self.assertIn((2, 2), neighbours)
         self.assertIn((2, 3), neighbours)
         
-        
+    def test_all_grid_neighbours(self):
+        """
+        Ensure that all of the grid positions have neighbours
+        """
+        grid = boggle.make_grid(2, 2) #Grid variable, makes a 2 x 2 grid (Neighbours of any position are the other two positions in the grid)
+        neighbours = boggle.all_grid_neighbours(grid) #Creates a dictionary
+        self.assertEqual(len(neighbours), len(grid)) #Asserts the correct lenght of the neighbours dctionary. 
+        for pos in grid: #For loop iterates through the grid.
+            others = list(grid) #Creates a list which is the full grid minus the position in question. 
+            others.remove(pos) #Removes the position in question from the others list. 
+            self.assertListEqual(sorted(neighbours[pos]), sorted(others)) #Asserts that the positions are the neighbours of the position being checked. 
+            
+            
+            
+            
+            
         
         
         
