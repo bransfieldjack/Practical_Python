@@ -56,21 +56,51 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         """
         grid = boggle.make_grid(2, 2) #Grid variable, makes a 2 x 2 grid (Neighbours of any position are the other two positions in the grid)
         neighbours = boggle.all_grid_neighbours(grid) #Creates a dictionary
-        self.assertEqual(len(neighbours), len(grid)) #Asserts the correct length of the neighbours dctionary. 
+        self.assertEqual(len(neighbours), len(grid)) #Asserts the correct length of the neighbours dictionary. 
         for pos in grid: #For loop iterates through the grid.
             others = list(grid) #Creates a list which is the full grid minus the position in question. 
             others.remove(pos) #Removes the position in question from the others list. 
             self.assertListEqual(sorted(neighbours[pos]), sorted(others)) #Asserts that the positions are the neighbours of the position being checked. 
             
-    def converting_a_path_to_a_word(self):
+    def converting_a_path_to_a_word(self): #Converts a path to a word. 
         """
         Ensure that paths can be converted to words.
         """
-        grid = boggle.make_grid(2, 2)
-        oneLetterWord = boggle.path_to_word(grid, [(0, 0)])
+        grid = boggle.make_grid(2, 2) #Make a grid 2x2
+        oneLetterWord = boggle.path_to_word(grid, [(0, 0)]) 
         twoLetterWord = boggle.path_to_word(grid, [(0, 0), (1, 1)])
         self.assertEqual(oneLetterWord, grid[(0, 0)])
         self.assertEqual(twoLetterWord, grid[(0, 0)] + grid[(1, 1)])
+        
+    def test_search_grid_for_words(self):
+        """
+        Ensure that certain patterns can be found in a path_to_word
+        """
+        
+        grid = {(0, 0): 'A', (0, 1): 'B', (1, 0): 'C', (1, 1): 'D'}
+        twoLetterWord = 'AB'
+        threeLetterWord = 'ABC'
+        notThereWord = 'EEE'
+        dictionary = [twoLetterWord, threeLetterWord, notThereWord]
+        
+        
+        foundWords = boggle.search(grid, dictionary)
+        
+        self.assertTrue(twoLetterWord in foundWords)
+        self.assertTrue(threeLetterWord in foundWords)
+        self.assertTrue(notThereWord not in foundWords)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
             
         
         
