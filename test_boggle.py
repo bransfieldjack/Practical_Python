@@ -56,15 +56,21 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         """
         grid = boggle.make_grid(2, 2) #Grid variable, makes a 2 x 2 grid (Neighbours of any position are the other two positions in the grid)
         neighbours = boggle.all_grid_neighbours(grid) #Creates a dictionary
-        self.assertEqual(len(neighbours), len(grid)) #Asserts the correct lenght of the neighbours dctionary. 
+        self.assertEqual(len(neighbours), len(grid)) #Asserts the correct length of the neighbours dctionary. 
         for pos in grid: #For loop iterates through the grid.
             others = list(grid) #Creates a list which is the full grid minus the position in question. 
             others.remove(pos) #Removes the position in question from the others list. 
             self.assertListEqual(sorted(neighbours[pos]), sorted(others)) #Asserts that the positions are the neighbours of the position being checked. 
             
-            
-            
-            
+    def converting_a_path_to_a_word(self):
+        """
+        Ensure that paths can be converted to words.
+        """
+        grid = boggle.make_grid(2, 2)
+        oneLetterWord = boggle.path_to_word(grid, [(0, 0)])
+        twoLetterWord = boggle.path_to_word(grid, [(0, 0), (1, 1)])
+        self.assertEqual(oneLetterWord, grid[(0, 0)])
+        self.assertEqual(twoLetterWord, grid[(0, 0)] + grid[(1, 1)])
             
         
         
