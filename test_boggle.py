@@ -1,5 +1,6 @@
 import unittest #Imports unittest framework
 import boggle #imports from boggle.py
+from string import ascii_uppercase #Imports the ascii characters a-z
 
 
 class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite for Boggle. 
@@ -24,7 +25,30 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         self.assertIn((1, 0), grid)
         self.assertIn((1, 1), grid)
         self.assertNotIn((2, 2), grid) #Assertion test to test that some coordinates are NOT in the grid. 
-        
+    
+    def test_grid_is_filled_with_letters(self): #Function to confirm that the frid is filled with letters. 
+        """
+        Ensure that each of the coordinates on the grid 
+        contains letters.
+        """
+        grid = boggle.make_grid(2, 3) #Local grid variable, calls make_grid from boggle.py. Passes arguments (2, 3)
+        for letter in grid.values(): #For loop to check for and return letters in the grid. 
+            self.assertIn(letter, ascii_uppercase) #Seertion test to confirm that letter is an Ascii character.  
+            
+    def test_neighbours_of_a_position(self):
+        """
+        Ensure that a position has 8 neighbours
+        """
+        coords = (1, 2)
+        neighbours = boggle.neighbours_of_a_position(coords)
+        self.assertIn((0, 1), neighbours)
+        self.assertIn((0, 2), neighbours)
+        self.assertIn((0, 3), neighbours)
+        self.assertIn((1, 1), neighbours)
+        self.assertIn((1, 3), neighbours)
+        self.assertIn((2, 1), neighbours)
+        self.assertIn((2, 2), neighbours)
+        self.assertIn((2, 3), neighbours)
         
         
         
