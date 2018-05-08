@@ -73,11 +73,14 @@ def search(grid, dictionary):
     """
     neighbours = all_grid_neighbours(grid)
     paths = []
+    full_words, stems = dictionary
     
     def do_search(path):
         word = path_to_word(grid, path)
-        if word_in_dictionary(word, dictionary):
+        if word in full_words:
             paths.append(path)
+        if word not in stems:
+            return
         for next_pos in neighbours[path[-1]]:
             if next_pos not in path:
                 do_search(path + [next_pos])
