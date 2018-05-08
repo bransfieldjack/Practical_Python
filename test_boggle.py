@@ -14,7 +14,7 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         grid = boggle.make_grid(0, 0) #Variable grid, calls the make.grid method in the boggle.py
         self.assertEqual(len(grid), 0) #Assertion test to test the length of the grid. 
             
-    def test_grid_coordinatges(self): #Method to test different coordinates on the grid. 
+    def test_grid_coordinates(self): #Method to test different coordinates on the grid. 
         """
         Test to ensure that all of the coordinates 
         inside of the grid can be accessed. 
@@ -91,7 +91,13 @@ class TestBoggle(unittest.TestCase): #Creates the TestBoggle class, test suite f
         self.assertTrue(notThereWord not in foundWords)
         
         
-        
+    def test_load_dictionary(self):
+        """
+        Test that the 'get_dictionary' function returns a dictionary
+        that has a length greater than 0
+        """
+        dictionary = boggle.get_dictionary('words.txt')
+        self.assertGreater(len(dictionary), 0)
         
         
         
